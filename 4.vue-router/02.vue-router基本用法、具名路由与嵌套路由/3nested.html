@@ -1,0 +1,73 @@
+<!-- 
+@2016-10-15 created by Sid histkc@gmail.com
+《Vue.js框架》第四部分 vue-router 第二小节：嵌套路由
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>嵌套路由</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+</head>
+<body>
+<div class="container" id="app">
+  <h1>嵌套路由</h1>
+  <hr />
+  <a v-link="'/jike'">jike</a>
+  <a v-link="'/xueyuan'">xueyuan</a>
+  <div>
+    <router-view></router-view>
+  </div>
+</div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/vue/1.0.28/vue.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/vue.router/0.7.13/vue-router.min.js"></script>
+<script type="text/javascript">
+// 配置路由对应的组件
+var JiKe = {
+  template: [
+  '<div>',
+    '<strong>JiKe</strong>',
+    '<a v-link=\'{path: "/jike/bbs"}\'>BBS</a>',
+    '<a v-link=\'{name: "jk.news"}\'>News</a>',
+  '</div>',
+  '<div>',
+    '<router-view></router-view>',
+  '</div>'
+  ].join('\n')
+};
+var JiKeBBS = {
+  template: '<strong>BBS</strong>'
+};
+var JiKeNews = {
+  template: '<strong>News</strong>'
+};
+var XueYuan = {
+  template: "<strong>XueYuan</strong>"
+};
+// 初始化路由
+var router = new VueRouter();
+// 路由配置
+router.map({
+  '/jike': {
+    name: 'jk',
+    component: JiKe,
+    subRoutes: {
+      '/bbs': {
+        name: 'jk.bbs',
+        component: JiKeBBS
+      },
+      '/news': {
+        name: 'jk.news',
+        component: JiKeNews
+      }
+    }
+  },
+  '/xueyuan': {
+    component: XueYuan
+  }
+});
+// 应用启动
+router.start(Vue.extend({}), '#app');
+</script>
+</body>
+</html>
