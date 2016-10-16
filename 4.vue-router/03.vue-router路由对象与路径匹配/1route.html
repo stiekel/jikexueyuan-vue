@@ -1,0 +1,71 @@
+<!-- 
+@2016-10-16 created by Sid histkc@gmail.com
+《Vue.js框架》第四部分 vue-router 第三小节：vue-router 路由对象属性和自定义字段
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>vue-router 路由对象属性和自定义字段</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+</head>
+<body>
+<div class="container" id="app">
+  <h1>vue-router 路由对象属性和自定义字段</h1>
+  <hr />
+  <a v-link="'/jike/test/is/ok/but/not/enought?query=sid'">/jike/test/is/ok/but/not/enought?query=sid</a>
+  <br />
+  <a v-link="'/xueyuan/sid/edit'">/xueyuan/sid/edit</a>
+  <div>
+    <router-view></router-view>
+  </div>
+</div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/vue/1.0.28/vue.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/vue.router/0.7.13/vue-router.min.js"></script>
+<script type="text/javascript">
+// 配置路由对应的组件
+var JiKe = {
+  template: [
+    '<strong>JiKe</strong>',
+    '<p>this.$route.query: <code>{{$route.query|json}}</code></p>',
+    '<p>this.$route.params: <code>{{$route.params|json}}</code></p>',
+    '<p>this.$route.path: <code>{{$route.path|json}}</code></p>',
+    '<p>this.$route.name: <code>{{$route.name|json}}</code></p>',
+    '<p>this.$route.matched: <code>{{$route.matched|json}}</code></p>',
+    '<p>this.$route.type: <code>{{$route.type|json}}</code></p>'
+  ].join('\n'),
+  ready () {
+    console.log('JiKe ready, this.$route:', this.$route);
+  }
+};
+var XueYuan = {
+  template: [
+    '<strong>XueYuan</strong>',
+    '<p>this.$route.query: <code>{{$route.query|json}}</code></p>',
+    '<p>this.$route.params: <code>{{$route.params|json}}</code></p>',
+    '<p>this.$route.path: <code>{{$route.path|json}}</code></p>',
+    '<p>this.$route.name: <code>{{$route.name|json}}</code></p>',
+    '<p>this.$route.matched: <code>{{$route.matched|json}}</code></p>',
+    '<p>this.$route.type: <code>{{$route.type|json}}</code></p>'
+  ].join('\n'),
+};
+// 初始化路由
+var router = new VueRouter();
+// 路由配置
+router.map({
+  '/jike/*fields': {
+    name: 'jk',
+    component: JiKe,
+    type: 'anonymous'
+  },
+  '/xueyuan/:name/:opt': {
+    name: 'xy',
+    component: XueYuan,
+    type: 'admin'
+  }
+});
+// 应用启动
+router.start(Vue.extend({}), '#app');
+</script>
+</body>
+</html>
