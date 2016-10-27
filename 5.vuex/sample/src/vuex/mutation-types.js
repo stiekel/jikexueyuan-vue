@@ -1,0 +1,3 @@
+export const INCEREMENT = 'INCEREMENT'
+export const INCEREMENTX = 'INCEREMENTX'
+export const DECEREMENT = 'DECEREMENT'
