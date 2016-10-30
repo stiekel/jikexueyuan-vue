@@ -1,5 +1,5 @@
 const INCEREMENT = 'INCEREMENT'
-import { DECEREMENT, SEND_REQUEST, GOT_REQUEST } from './mutation-types'
+import { DECEREMENT, SEND_REQUEST, GOT_REQUEST, UPDATE_USER_NAME } from './mutation-types'
 import { sendOnlineRequest, getOnlineCount } from '../api/counter'
 
 export const decerement = (store) => {
@@ -25,4 +25,8 @@ export const incerementx = ({dispatch}, x) => {
     x = Math.floor(Math.random() * 100)
   }
   dispatch('INCEREMENTX', x)
+}
+
+export const updateUserName = ({dispatch}, name) => {
+  dispatch(UPDATE_USER_NAME, name)
 }

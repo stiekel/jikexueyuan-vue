@@ -13,20 +13,31 @@
     <button :disabled="isRequesting" @click="sendRequest">
       {{isRequesting ? 'Requesting' : 'Send Request'}}
     </button>
+    <input v-model="username" />
+    <input :value="user.name" @change="inputUserName" />
   </div>
 </template>
 
 <script>
 import Hello from './components/Hello'
 // import * as actions from './vuex/actions'
-import { incerement, decerement, incerementx, sendRequest } from './vuex/actions'
+import { incerement, decerement, incerementx, sendRequest, updateUserName } from './vuex/actions'
 import store from './vuex/store'
 import { countEG } from './vuex/getters'
 export default {
   computed: {
     // 直接通过 store 获取值
     countC: () => store.state.count,
-    isRequesting: () => store.state.isRequesting
+    isRequesting: () => store.state.isRequesting,
+    user: () => store.state.user,
+    username: {
+      get () {
+        return store.state.user.name
+      },
+      set (v) {
+        this.updateUserName(v)
+      }
+    }
   },
   components: {
     Hello
@@ -34,6 +45,9 @@ export default {
   methods: {
     addOne () {
       this.incerement()
+    },
+    inputUserName (e) {
+      this.updateUserName(e.target.value)
     }
   },
   ready () {
@@ -43,7 +57,7 @@ export default {
     console.log('get from import store', store.state.count)
   },
   vuex: {
-    actions: { incerement, incerementx, decerement, sendRequest },
+    actions: { incerement, incerementx, decerement, sendRequest, updateUserName },
     // 通过 getters 获取 store 中的值
     getters: {
       countG: (state) => {
