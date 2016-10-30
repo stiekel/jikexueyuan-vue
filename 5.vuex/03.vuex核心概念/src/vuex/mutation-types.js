@@ -1,3 +1,5 @@
 export const INCEREMENT = 'INCEREMENT'
 export const INCEREMENTX = 'INCEREMENTX'
 export const DECEREMENT = 'DECEREMENT'
+export const SEND_REQUEST = 'SEND_REQUEST'
+export const GOT_REQUEST = 'GOT_REQUEST'

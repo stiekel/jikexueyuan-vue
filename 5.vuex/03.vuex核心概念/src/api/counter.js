@@ -3,3 +3,9 @@ export const getOnlineCount = (cb) => {
     return cb(null)
   }, 300)
 }
+
+export const sendOnlineRequest = (cb) => {
+  setTimeout(() => {
+    return cb(null)
+  }, 1200)
+}

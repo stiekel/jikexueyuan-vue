@@ -1,9 +1,16 @@
 const INCEREMENT = 'INCEREMENT'
-import { DECEREMENT } from './mutation-types'
-import { getOnlineCount } from '../api/counter'
+import { DECEREMENT, SEND_REQUEST, GOT_REQUEST } from './mutation-types'
+import { sendOnlineRequest, getOnlineCount } from '../api/counter'
 
 export const decerement = (store) => {
   store.dispatch(DECEREMENT)
+}
+
+export const sendRequest = ({dispatch}) => {
+  dispatch(SEND_REQUEST)
+  sendOnlineRequest(rlt => {
+    dispatch(GOT_REQUEST, rlt)
+  })
 }
 
 export const incerement = ({dispatch}) => {
