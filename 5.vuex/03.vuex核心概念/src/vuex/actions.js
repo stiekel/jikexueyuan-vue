@@ -1,12 +1,16 @@
 const INCEREMENT = 'INCEREMENT'
 import { DECEREMENT } from './mutation-types'
+import { getOnlineCount } from '../api/counter'
 
 export const decerement = (store) => {
   store.dispatch(DECEREMENT)
 }
 
 export const incerement = ({dispatch}) => {
-  setTimeout(() => dispatch(INCEREMENT), 1000)
+  getOnlineCount((err) => {
+    if (err) return
+    dispatch(INCEREMENT)
+  })
 }
 
 export const incerementx = ({dispatch}, x) => {
